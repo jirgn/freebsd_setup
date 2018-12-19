@@ -142,5 +142,44 @@ are a kind of templates for jails and are located in /usr/jails/flavours
 ### Mount Filesystems
 
 each jail has it's own fstab file which is located in 
-/etc/fstab.<jailname>
+
+    /etc/fstab.<jailname>
+
 to inject some local filesystems put them in here in the standard fstab form
+For example use
+
+	# /etc/fstab.share_home
+	/usr/jails/basejail /usr/jails/share.home/basejail nullfs ro 0 0
+	/pool_01/home /usr/jails/share.home/mnt/home nullfs rw 0 0
+	/pool_01/media /usr/jails/share.home/mnt/media nullfs rw 0 0
+	/pool_01/timemachine/jirgn /usr/jails/share.home/mnt/timemachine/jirgn nullfs rw 0 0
+
+# Crashplan on bsd
+
+* install port sysutil/linux-crashplan
+
+Install Locations 
+* /usr/local/share/crashplan
+* /usr/local/etc/rc.d/crashplan
+
+On FreeBSD, the authentication token file can be found in
+/compat/linux/var/lib/CrashPlan/.ui_info
+
+## Client
+ensure you have same version of crashplan - maybe download via 
+https://download1.code42.com/installs/mac/install/CrashPlan/CrashPlan_<version>_Mac.dmg
+
+### Fix environment - Linux Compatibility
+For crashplan to run - it needs the linux compatibility layer and also the linproc filesystem mounted
+Otherwise you get a java error that the jlilib is not available
+
+add linproc to your /etc/fstab
+
+	linproc /compat/linux/proc linprocfs rw 0 0
+
+if running in a jail set the this into your /etc/fstab.<jailname>
+
+	linproc /path-to-jail/compat/linux/proc linprocfs rw 0 0
+
+### Setup 
+see [official Crashplan Headless guide](https://support.crashplan.com/Configuring/Using_CrashPlan_On_A_Headless_Computer)
