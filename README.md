@@ -183,3 +183,47 @@ if running in a jail set the this into your /etc/fstab.<jailname>
 
 ### Setup 
 see [official Crashplan Headless guide](https://support.crashplan.com/Configuring/Using_CrashPlan_On_A_Headless_Computer)
+
+## Update 
+
+### Operation System
+
+#### Host
+Stop all jails by 
+
+    sudo ezjail-admin stop <jail-name>
+
+update the system
+see [official Documentation](https://www.freebsd.org/doc/de_DE.ISO8859-1/books/handbook/updating-upgrading-freebsdupdate.html)
+
+    sudo freebsd-udpate fetch
+    sudo freebsd-update install
+
+#### Update jails
+restart machine after host update and do the following
+Then update basejail (this will update all jails os)
+
+    sudo ezjail-admin update -u # updates based on binary release 
+
+### Packages
+
+See [official Documentation](https://www.freebsd.org/doc/handbook/ports-using.html)
+update ports
+
+    sudo portsnap fetch update
+
+    # list outdated packages with packagemanager
+    pgk version -l "<"
+
+    # list outdated packages with portmaster (compiled install)
+    portmaster -L
+    
+    # update ports for basejail
+    sudo ezjail-admin update -P 
+
+    # in jails better use pkg
+    ezjail-admin console <somejail>
+    pkg version -l '<'
+    pkg update
+    pkg upgrade
+
