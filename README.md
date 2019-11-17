@@ -206,6 +206,7 @@ Then update basejail (this will update all jails os)
     sudo ezjail-admin update -u # updates based on binary release 
 
 if udpateing to minor or major versions detect current basejail version with
+more information see [ezjail major update](https://forums.freebsd.org/threads/ezjail-and-major-host-upgrades.52203/#post-292852)
 
     file /usr/jails/basejail/bin/sh
 
