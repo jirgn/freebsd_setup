@@ -205,6 +205,14 @@ Then update basejail (this will update all jails os)
 
     sudo ezjail-admin update -u # updates based on binary release 
 
+if udpateing to minor or major versions detect current basejail version with
+
+    file /usr/jails/basejail/bin/sh
+
+and update the basejail with 
+
+    ezjail-admin update -U -s <detected-version>-RELEASE
+
 ### Packages
 
 See [official Documentation](https://www.freebsd.org/doc/handbook/ports-using.html)
